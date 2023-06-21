@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehouse
+  labels:
+    app: warehouse
+  namespace: microservices-workshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warehouse
+  template:
+    metadata:
+      labels:
+        app: warehouse
+      annotations:
+        linkerd.io/inject: enabled
+    spec:
+      serviceAccountName: warehouse
+      containers:
+        - name: warehouse
+          imagePullPolicy: Always
+          image: localhost:5000/warehouse:{{version}}
+          ports:
+            - containerPort: 8080
+            - containerPort: 8081
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod,processmanager
+            - name: SENTRY_DSN
+              value: https://31bfc0c263664d858a3fbb1c3d15fe23@o4505347633774592.ingest.sentry.io/4505391154003968
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: kafka-broker:29092
+          livenessProbe:
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 6
+            httpGet:
+              port: 8081
+              path: /actuator/health
+          readinessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            failureThreshold: 8
+            httpGet:
+              port: 8081
+              path: /actuator/health
