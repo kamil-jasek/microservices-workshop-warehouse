@@ -16,6 +16,8 @@ spec:
         app: warehouse
       annotations:
         linkerd.io/inject: enabled
+        prometheus.io/should_be_scraped: "true"
+        prometheus.io/scrape_port: "8081"
     spec:
       serviceAccountName: warehouse
       containers:

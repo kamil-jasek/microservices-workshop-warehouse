@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.mycompany</groupId>
 	<artifactId>warehouse</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.8-SNAPSHOT</version>
 	<name>warehouse</name>
 	<description>Demo project for Microservice workshop</description>
 
@@ -60,6 +60,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
 
 		<dependency>
