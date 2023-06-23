@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.mycompany</groupId>
 	<artifactId>warehouse</artifactId>
-	<version>0.0.8-SNAPSHOT</version>
+	<version>0.0.9-SNAPSHOT</version>
 	<name>warehouse</name>
 	<description>Demo project for Microservice workshop</description>
 
