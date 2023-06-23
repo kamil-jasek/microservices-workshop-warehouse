@@ -3,6 +3,7 @@ package com.mycompany.warehouse.infra.port.inbound.kafka.orders;
 import com.mycompany.warehouse.StockReleaseQueue;
 import com.mycompany.warehouse.domain.StockReleaseOrder;
 import com.mycompany.warehouse.domain.StockReleaseOrderItem;
+import com.mycompany.warehouse.infra.port.inbound.kafka.orders.OrderMadeV1.OrderMadeData;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -34,9 +35,8 @@ class OrderMadeKafkaListener {
         stockReleaseQueue.add(createStockReleaseOrder(event.getData()));
     }
 
-    private StockReleaseOrder createStockReleaseOrder(OrderMadeV1.OrderMadeData order) {
+    private StockReleaseOrder createStockReleaseOrder(OrderMadeData order) {
         return new StockReleaseOrder(
-            randomUUID(),
             order.id(),
             customerRestApi.findById(order.customerId()).deliveryAddress(),
             order.orderItems()

@@ -33,7 +33,7 @@ class StockReleaseJob {
             return;
         }
         if (order.hasProductOutOfStock(productIdOutOfStock)) {
-            publishProductOutOfStockEvent(order.orderId());
+            publishProductOutOfStockEvent(order.waybillId());
         } else {
             publishStockReleased(order);
         }
@@ -48,6 +48,6 @@ class StockReleaseJob {
     private void publishStockReleased(StockReleaseOrder order) {
         kafkaTemplate.send(
             "warehouse-stock-released-v1",
-            StockReleasedV1.of(new StockReleased(order.waybillId(), order.orderId())));
+            StockReleasedV1.of(new StockReleased(order.waybillId(), UUID.randomUUID())));
     }
 }

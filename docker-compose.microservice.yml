@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  warehouse:
+    build: .
+    image: localhost:5000/warehouse
+    ports:
+      - "8092:8092"
+    depends_on:
+      - kafka-broker
+      - wiremock
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_CLOUD_OPENFEIGN_CLIENT_CONFIG_CUSTOMERS_URL: http://wiremock:8080
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka-broker:29092

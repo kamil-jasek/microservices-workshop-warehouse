@@ -29,6 +29,6 @@ public final class ProductOutOfStockV1 extends DomainEvent<ProductOutOfStockData
             data);
     }
 
-    public record ProductOutOfStockData(UUID orderId, UUID productId) implements DomainEventData {
+    public record ProductOutOfStockData(UUID waybillId, UUID productId) implements DomainEventData {
     }
 }

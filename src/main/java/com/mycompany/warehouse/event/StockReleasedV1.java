@@ -14,7 +14,7 @@ import static java.util.UUID.randomUUID;
 @JsonSubtype
 public final class StockReleasedV1 extends DomainEvent<StockReleased> {
 
-    public record StockReleased(UUID waybillId, UUID orderId) implements DomainEventData {
+    public record StockReleased(UUID waybillId, UUID shipmentId) implements DomainEventData {
     }
 
     public StockReleasedV1(@NonNull UUID eventId,

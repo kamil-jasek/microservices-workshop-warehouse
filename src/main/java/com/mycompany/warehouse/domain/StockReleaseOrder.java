@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public record StockReleaseOrder(@NonNull UUID waybillId,
-                                @NonNull UUID orderId,
                                 @NonNull @Valid DeliveryAddress deliveryAddress,
                                 @NonNull @Valid @NotEmpty List<StockReleaseOrderItem> items) {
 
